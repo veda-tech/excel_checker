@@ -1,0 +1,5 @@
+SOURCE_HEADERS_INDEX = 21
+FROM_PATH = "./from"
+TO_PATH = "./to"
+OUTPUT_PATH = "./output/"
+EQUAL_PERCENT = 0.95
