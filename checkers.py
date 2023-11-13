@@ -3,7 +3,7 @@ from difflib import SequenceMatcher
 from settings import EQUAL_PERCENT
 
 
-TRANSLATED_PATTERNS = {"А": "A", "А1": "A1", "В1": "B1", "В": "B"}
+TRANSLATED_PATTERNS = {"А": "A", "В": "B", "С": "C"}
 
 
 def check_city(city_1, city_2):
@@ -13,7 +13,9 @@ def check_city(city_1, city_2):
 def check_side(side_1, side_2):
     if str(side_1).strip() not in TRANSLATED_PATTERNS:
         return False
-    return TRANSLATED_PATTERNS[str(side_1).strip()] == str(side_2).strip()
+    for symbol in TRANSLATED_PATTERNS:
+        side_1 = str(side_1).strip().replace(symbol, TRANSLATED_PATTERNS[symbol])
+    return side_1 == str(side_2).strip()
 
 
 def check_addres(addres_1, addres_2):
