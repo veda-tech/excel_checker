@@ -1,4 +1,5 @@
 from difflib import SequenceMatcher
+from tkinter import messagebox as mb
 
 from settings import EQUAL_PERCENT
 
@@ -45,13 +46,12 @@ def check_addres(addres_1, addres_2):
         ).ratio()
         >= EQUAL_PERCENT
     ):
-        access = input(
-            f"Подтвердите что адрес {addres_1} это {addres_2}, напишите y или Y \n"
-        )
-        if access in ["y", "Y"]:
-            return True
+        return check_in_frame(addres_1, addres_2)
     return False
 
+def check_in_frame(addres_1, addres_2):
+    res = mb.askquestion('Проверка адреса', f"{addres_1}\nэто\n{addres_2}\n?")
+    return res == 'yes'
 
 def check_sum(item, source_item) -> bool:
     return str(item["Итого, NET"]) == str(source_item["Цена ролик 5 сек"])
