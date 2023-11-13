@@ -17,8 +17,22 @@ def check_side(side_1, side_2):
 
 
 def check_addres(addres_1, addres_2):
-    normalized_addres_1 = str(addres_1).replace("(Digital)", "").replace(" ", "")
-    normalized_addres_2 = str(addres_2).replace("(Digital)", "").replace(" ", "")
+    def normalize_addres(addres):
+        return (
+            str(addres)
+            .lower()
+            .strip()
+            .replace("(Digital)", "")
+            .replace(" ", "")
+            .replace("-", "")
+            .replace('.', '')
+            .replace(',', '')
+            .replace('(', '')
+            .replace(')', '')
+        )
+
+    normalized_addres_1 = normalize_addres(addres_1)
+    normalized_addres_2 = normalize_addres(addres_2)
     if normalized_addres_1 == normalized_addres_2:
         return True
     if (
@@ -29,8 +43,10 @@ def check_addres(addres_1, addres_2):
         ).ratio()
         >= EQUAL_PERCENT
     ):
-        access = input(f'Подтвердите что адрес {addres_1} это {addres_2}, напишите y или Y \n')
-        if access in ['y', 'Y']:
+        access = input(
+            f"Подтвердите что адрес {addres_1} это {addres_2}, напишите y или Y \n"
+        )
+        if access in ["y", "Y"]:
             return True
     return False
 
