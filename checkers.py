@@ -37,8 +37,8 @@ def check_addres(addres_1, addres_2):
         return True
     if (
         SequenceMatcher(
-            a=str(addres_1).replace("(Digital)", "").replace(" ", ""),
-            b=str(addres_2).replace("(Digital)", "").replace(" ", ""),
+            a=normalized_addres_1,
+            b=normalized_addres_2,
             autojunk=True,
         ).ratio()
         >= EQUAL_PERCENT

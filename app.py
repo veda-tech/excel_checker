@@ -61,8 +61,6 @@ def main():
 
     shutil.copy2(to_file, result_path)
     pprint(results)
-    print("\n\n\n")
-    pprint(not_matched)
 
     workbook = load_workbook(result_path)
     for city in listnames:
