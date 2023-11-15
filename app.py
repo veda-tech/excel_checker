@@ -36,6 +36,7 @@ def process(window: tk.Tk, cities):
 
         list_counter = 0
         results = {}
+        report = []
         not_matched = []
 
         while list_counter < len(listnames):
@@ -60,11 +61,14 @@ def process(window: tk.Tk, cities):
                     not_matched.append(item["Адрес"])
                     continue
                 if not check_sum(item, source_item):
+                    report.append(
+                        f'{item["#"]} - {list_city} - {item["Адрес"]} - {item["Сторона"]} - {source_item["Цена ролик 5 сек"]}'
+                    )
                     results[item["#"]] = source_item["Цена ролик 5 сек"]
             list_counter += 1
 
         shutil.copy2(to_file, result_path)
-        pprint(results)
+        pprint(report)
         mb.showinfo(title='Процесс начат',message="Началось создание нового файла, вы получите информацию по завершению")
         workbook = load_workbook(result_path)
         for city in listnames:
@@ -87,7 +91,7 @@ def process(window: tk.Tk, cities):
         workbook.save(result_path)
         workbook.close()
         with open(logfile_path, "w", encoding="utf-8") as file:
-            json.dump(results, file, indent=4, ensure_ascii=False)
+            json.dump(report, file, indent=4, ensure_ascii=False)
         mb.showinfo(title='Процесс завершен', message="Успешно")
     except Exception as e:
         print(e)
